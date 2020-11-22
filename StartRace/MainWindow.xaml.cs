@@ -23,6 +23,7 @@ namespace StartRace
         public MainWindow()
         {
             InitializeComponent();
+            List<Vehicle> vehicles = new List<Vehicle>();
         }
     }
 
@@ -37,6 +38,11 @@ namespace StartRace
             Speed = _speed;
             ProbabilityPuncturedWheel = _probabilityPuncturedWheel;
         }
+
+        public virtual string GetStatus()
+        {
+            return "ЭЭЭ меня тут нет!";
+        }
     }
 
     public class Truck : Vehicle
@@ -46,6 +52,13 @@ namespace StartRace
         public Truck(int _speed, int _probabilityPuncturedWheel, int _cargoWeight) : base (_speed, _probabilityPuncturedWheel)
         {
             CargoWeight = _cargoWeight;
+        }
+
+        public override string GetStatus()
+        {
+            return $"Грузовик, Скорость: {Speed}\n" +
+                $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
+                $"Вес груза: {CargoWeight}";
         }
     }
 
@@ -57,6 +70,13 @@ namespace StartRace
         {
             NumberPassengers = _numberPassengers;
         }
+
+        public override string GetStatus()
+        {
+            return $"Легковой, Скорость: {Speed}\n" +
+                $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
+                $"Количество пассажиров: {NumberPassengers}";
+        }
     }
 
     public class Motorcycle : Vehicle
@@ -66,6 +86,13 @@ namespace StartRace
         public Motorcycle(int _speed, int _probabilityPuncturedWheel, bool _isSidecar) : base(_speed, _probabilityPuncturedWheel)
         {
             isSidecar = _isSidecar;
+        }
+
+        public override string GetStatus()
+        {
+            return $"Мотоцикл, Скорость: {Speed}\n" +
+                $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
+                $"{(isSidecar ? "Мотоцикл с коляской" : "Мотоцикл без коляски")}";
         }
     }
 }
