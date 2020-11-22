@@ -20,15 +20,32 @@ namespace StartRace
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Vehicle> vehicles = new List<Vehicle>();
+
         public MainWindow()
         {
             InitializeComponent();
-            List<Vehicle> vehicles = new List<Vehicle>();
+            cbType.Items.Add("Truck");
+            cbType.Items.Add("Car");
+            cbType.Items.Add("Motorcycle");
         }
 
         private void bc_Add(object sender, RoutedEventArgs e)
         {
-
+            switch (cbType.SelectedIndex)
+            {
+                case 0:
+                    vehicles.Add(new Truck(int.Parse(tbSpeed.Text), int.Parse(tbProbability.Text), int.Parse(tbSpecific.Text)));
+                    break;
+                case 1:
+                    vehicles.Add(new Car(int.Parse(tbSpeed.Text), int.Parse(tbProbability.Text), int.Parse(tbSpecific.Text)));
+                    break;
+                case 2:
+                    vehicles.Add(new Motorcycle(int.Parse(tbSpeed.Text), int.Parse(tbProbability.Text), tbSpecific.Text == "да" ? true : false));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -61,7 +78,7 @@ namespace StartRace
 
         public override string GetStatus()
         {
-            return $"Грузовик, Скорость: {Speed}\n" +
+            return $"Truck, Скорость: {Speed}\n" +
                 $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
                 $"Вес груза: {CargoWeight}";
         }
@@ -78,7 +95,7 @@ namespace StartRace
 
         public override string GetStatus()
         {
-            return $"Легковой, Скорость: {Speed}\n" +
+            return $"Car, Скорость: {Speed}\n" +
                 $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
                 $"Количество пассажиров: {NumberPassengers}";
         }
@@ -95,7 +112,7 @@ namespace StartRace
 
         public override string GetStatus()
         {
-            return $"Мотоцикл, Скорость: {Speed}\n" +
+            return $"Motorcycle, Скорость: {Speed}\n" +
                 $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
                 $"{(isSidecar ? "Мотоцикл с коляской" : "Мотоцикл без коляски")}";
         }
