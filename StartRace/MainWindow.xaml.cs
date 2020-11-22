@@ -26,6 +26,7 @@ namespace StartRace
         List<Task> tVehicle = new List<Task>();
         List<Vehicle> vehicles = new List<Vehicle>();
         int distance;
+        Random r = new Random();
 
         public MainWindow()
         {
@@ -92,7 +93,7 @@ namespace StartRace
                 tbOut.AppendText(_v.GetStatus());
             });
 
-            for (int i = 0; i < _distance; i++)
+            for (int i = 0; i < _distance; i += _v.Speed)
             {
                 if (Punctured(_v.ProbabilityPuncturedWheel))
                 {
@@ -104,12 +105,17 @@ namespace StartRace
                 }
                 Thread.Sleep(1000);
                 _v.Distance += _v.Speed;
+
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    tbOut.AppendText($"{_v.GetType().Name} проехал: {_v.Distance}м.\n");
+                });
             }
         }
 
         private bool Punctured(int chance)
         {
-            return new Random().NextDouble() < chance;
+            return r.Next(100) < chance;
         }
     }
 
