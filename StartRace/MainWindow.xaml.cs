@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace StartRace
 {
@@ -86,6 +87,11 @@ namespace StartRace
 
         private void Drive(Vehicle _v, int _distance)
         {
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                tbOut.AppendText(_v.GetStatus());
+            });
+
             for (int i = 0; i < _distance; i++)
             {
                 if (Punctured(_v.ProbabilityPuncturedWheel))
@@ -134,7 +140,7 @@ namespace StartRace
         {
             return $"Truck, Скорость: {Speed}\n" +
                 $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
-                $"Вес груза: {CargoWeight}";
+                $"Вес груза: {CargoWeight}\n";
         }
     }
 
@@ -151,7 +157,7 @@ namespace StartRace
         {
             return $"Car, Скорость: {Speed}\n" +
                 $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
-                $"Количество пассажиров: {NumberPassengers}";
+                $"Количество пассажиров: {NumberPassengers}\n";
         }
     }
 
@@ -168,7 +174,7 @@ namespace StartRace
         {
             return $"Motorcycle, Скорость: {Speed}\n" +
                 $"Вероятность прокола колеса {ProbabilityPuncturedWheel}\n" +
-                $"{(isSidecar ? "Мотоцикл с коляской" : "Мотоцикл без коляски")}";
+                $"{(isSidecar ? "Мотоцикл с коляской" : "Мотоцикл без коляски")}\n";
         }
     }
 }
