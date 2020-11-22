@@ -96,6 +96,10 @@ namespace StartRace
             {
                 if (Punctured(_v.ProbabilityPuncturedWheel))
                 {
+                    Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        tbOut.AppendText($"{_v.GetType().Name} прокол колеса!\n");
+                    });
                     Thread.Sleep(5000);
                 }
                 Thread.Sleep(1000);
