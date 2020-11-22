@@ -25,6 +25,11 @@ namespace StartRace
             InitializeComponent();
             List<Vehicle> vehicles = new List<Vehicle>();
         }
+
+        private void bc_Add(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public abstract class Vehicle

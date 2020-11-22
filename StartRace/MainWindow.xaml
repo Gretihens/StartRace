@@ -7,6 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Margin="3" Content="Тип транспортного средства"/>
+        <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="Скорость м/с"/>
+        <Label Grid.Row="2" Grid.Column="0" Margin="3" Content="Вероятность прокола"/>
+        <Label Grid.Row="3" Grid.Column="0" Margin="3" Content="Спецификация транспортного средства"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" x:Name="cbType"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="3" x:Name="tbSpeed"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="3" x:Name="tbProbability"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="3" x:Name="tbSpecific"/>
+        <Button Grid.Row="4" Grid.ColumnSpan ="2" Margin="3" Content="Добавить" Click="bc_Add"/>
     </Grid>
 </Window>
