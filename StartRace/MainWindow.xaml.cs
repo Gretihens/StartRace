@@ -25,6 +25,7 @@ namespace StartRace
         Task tMain;
         List<Task> tVehicle = new List<Task>();
         List<Vehicle> vehicles = new List<Vehicle>();
+        List<Result> result = new List<Result>();
         int distance;
         Random r = new Random();
 
@@ -82,8 +83,15 @@ namespace StartRace
         {
             foreach (var item in vehicles)
             {
+                item.Distance = 0;
                 tVehicle.Add(Task.Run(() => Drive(item, distance)));
             }
+
+            Task.WaitAll(tVehicle.ToArray());
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                dgResult.ItemsSource = result;
+            });
         }
 
         private void Drive(Vehicle _v, int _distance)
@@ -105,6 +113,11 @@ namespace StartRace
                 }
                 Thread.Sleep(1000);
                 _v.Distance += _v.Speed;
+                if (_v.Distance >= distance)
+                {
+                    _v.Distance = distance;
+                    result.Add(new Result(result.Count + 1, _v.GetType().Name));
+                }
 
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
@@ -116,6 +129,23 @@ namespace StartRace
         private bool Punctured(int chance)
         {
             return r.Next(100) < chance;
+        }
+
+        private void bc_Clean(object sender, RoutedEventArgs e)
+        {
+            vehicles = new List<Vehicle>();
+        }
+    }
+
+    public class Result
+    {
+        public int Position { get; }
+        public string Type { get; }      
+
+        public Result(int _position, string _type)
+        {
+            Position = _position;
+            Type = _type;
         }
     }
 

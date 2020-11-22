@@ -15,10 +15,11 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Margin="3" Content="Тип транспортного средства"/>
@@ -29,10 +30,12 @@
         <TextBox Grid.Row="1" Grid.Column="1" Margin="3" x:Name="tbSpeed" Text="10"/>
         <TextBox Grid.Row="2" Grid.Column="1" Margin="3" x:Name="tbProbability" Text="10"/>
         <TextBox Grid.Row="3" Grid.Column="1" Margin="3" x:Name="tbSpecific" Text="10"/>
-        <Button Grid.Row="4" Grid.ColumnSpan ="2" Margin="3" Content="Добавить" Click="bc_Add"/>
+        <Button Grid.Row="4" Grid.Column ="0" Margin="3" Content="Добавить" Click="bc_Add"/>
+        <Button Grid.Row="4" Grid.Column ="1" Margin="3" Content="Отчистить" Click="bc_Clean"/>
         <Label Grid.Row="5" Grid.Column="0" Margin="3" Content="Длина круга м"/>
         <TextBox Grid.Row="5" Grid.Column="1" Margin="3" x:Name="tbDistance" Text="300"/>
         <Button Grid.Row="6" Grid.ColumnSpan="2" Margin="3" Content="Старт гонки!" Click="bc_Start"/>
         <TextBox Grid.RowSpan="7" Grid.Column="2" Margin="3" x:Name="tbOut" Height="200" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <DataGrid Grid.Row="8" Grid.ColumnSpan="3" Margin="3" x:Name="dgResult"/>
     </Grid>
 </Window>
