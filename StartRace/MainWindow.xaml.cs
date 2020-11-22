@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,10 @@ namespace StartRace
     /// </summary>
     public partial class MainWindow : Window
     {
+        Task tMain;
+        List<Task> tVehicle = new List<Task>();
         List<Vehicle> vehicles = new List<Vehicle>();
+        int distance;
 
         public MainWindow()
         {
@@ -47,13 +51,63 @@ namespace StartRace
                     break;
             }
         }
+
+        private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (cbType.SelectedIndex)
+            {
+                case 0:
+                    lSpecific.Content = "Вес груза кг";
+                    break;
+                case 1:
+                    lSpecific.Content = "Количество пассажиров";
+                    break;
+                case 2:
+                    lSpecific.Content = "Наличие коляски да/нет";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void bc_Start(object sender, RoutedEventArgs e)
+        {
+            distance = int.Parse(tbDistance.Text);
+            tMain = Task.Run(() => Race());
+        }
+
+        private void Race()
+        {
+            foreach (var item in vehicles)
+            {
+                tVehicle.Add(Task.Run(() => Drive(item, distance)));
+            }
+        }
+
+        private void Drive(Vehicle _v, int _distance)
+        {
+            for (int i = 0; i < _distance; i++)
+            {
+                if (Punctured(_v.ProbabilityPuncturedWheel))
+                {
+                    Thread.Sleep(5000);
+                }
+                Thread.Sleep(1000);
+                _v.Distance += _v.Speed;
+            }
+        }
+
+        private bool Punctured(int chance)
+        {
+            return new Random().NextDouble() < chance;
+        }
     }
 
     public abstract class Vehicle
     {
         public int Speed { get; }                           //скорость метров в секунду
         public int ProbabilityPuncturedWheel { get; }       //вероятность прокола колеса
-        public bool isPunctured { get; set; }               //факт прокола
+        public int Distance { get; set; }                   //пройденное расстояние
 
         public Vehicle(int _speed, int _probabilityPuncturedWheel)
         {

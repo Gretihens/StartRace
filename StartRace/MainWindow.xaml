@@ -13,6 +13,8 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -22,11 +24,14 @@
         <Label Grid.Row="0" Grid.Column="0" Margin="3" Content="Тип транспортного средства"/>
         <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="Скорость м/с"/>
         <Label Grid.Row="2" Grid.Column="0" Margin="3" Content="Вероятность прокола"/>
-        <Label Grid.Row="3" Grid.Column="0" Margin="3" Content="Спецификация транспортного средства"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" x:Name="cbType"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="3" x:Name="tbSpeed"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="3" x:Name="tbProbability"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="3" x:Name="tbSpecific"/>
+        <Label Grid.Row="3" Grid.Column="0" Margin="3" x:Name="lSpecific" Content="Спецификация транспортного средства"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" x:Name="cbType" SelectionChanged="cbType_SelectionChanged" />
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="3" x:Name="tbSpeed" Text="10"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="3" x:Name="tbProbability" Text="10"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="3" x:Name="tbSpecific" Text="10"/>
         <Button Grid.Row="4" Grid.ColumnSpan ="2" Margin="3" Content="Добавить" Click="bc_Add"/>
+        <Label Grid.Row="5" Grid.Column="0" Margin="3" Content="Длина круга м"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Margin="3" x:Name="tbDistance" Text="300"/>
+        <Button Grid.Row="6" Grid.ColumnSpan="2" Margin="3" Content="Старт гонки!" Click="bc_Start"/>
     </Grid>
 </Window>
