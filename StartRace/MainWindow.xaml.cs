@@ -93,6 +93,7 @@ namespace StartRace
             {
                 dgResult.ItemsSource = result;
             });
+            MessageBox.Show("Если желаете отправить их ещё на один круг, нажмите еще раз 'Старт гонки!'");
         }
 
         private void Drive(Vehicle _v, int _distance)
@@ -144,9 +145,9 @@ namespace StartRace
 
     public class Result
     {
-        public int Position { get; }
-        public string Type { get; }
-        public int Time { get; }
+        public int Position { get; }                        //Место
+        public string Type { get; }                         //Тип
+        public int Time { get; }                            //Время в с
 
         public Result(int _position, string _type, int _time)
         {
