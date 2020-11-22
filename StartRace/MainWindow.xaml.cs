@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -101,6 +102,9 @@ namespace StartRace
                 tbOut.AppendText(_v.GetStatus());
             });
 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             for (int i = 0; i < _distance; i += _v.Speed)
             {
                 if (Punctured(_v.ProbabilityPuncturedWheel))
@@ -115,8 +119,9 @@ namespace StartRace
                 _v.Distance += _v.Speed;
                 if (_v.Distance >= distance)
                 {
+                    stopwatch.Stop();
                     _v.Distance = distance;
-                    result.Add(new Result(result.Count + 1, _v.GetType().Name));
+                    result.Add(new Result(result.Count + 1, _v.GetType().Name, (int)stopwatch.ElapsedMilliseconds / 1000));
                 }
 
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -140,12 +145,14 @@ namespace StartRace
     public class Result
     {
         public int Position { get; }
-        public string Type { get; }      
+        public string Type { get; }
+        public int Time { get; }
 
-        public Result(int _position, string _type)
+        public Result(int _position, string _type, int _time)
         {
             Position = _position;
             Type = _type;
+            Time = _time;
         }
     }
 
