@@ -31,20 +31,41 @@ namespace StartRace
         public int Speed { get; }                           //скорость метров в секунду
         public int ProbabilityPuncturedWheel { get; }       //вероятность прокола колеса
         public bool isPunctured { get; set; }               //факт прокола
+
+        public Vehicle(int _speed, int _probabilityPuncturedWheel)
+        {
+            Speed = _speed;
+            ProbabilityPuncturedWheel = _probabilityPuncturedWheel;
+        }
     }
 
     public class Truck : Vehicle
     {
         public int CargoWeight { get; }                     //вес груза
+
+        public Truck(int _speed, int _probabilityPuncturedWheel, int _cargoWeight) : base (_speed, _probabilityPuncturedWheel)
+        {
+            CargoWeight = _cargoWeight;
+        }
     }
 
     public class Car : Vehicle
     {
         public int NumberPassengers { get; }                //количество пассажиров
+
+        public Car(int _speed, int _probabilityPuncturedWheel, int _numberPassengers) : base(_speed, _probabilityPuncturedWheel)
+        {
+            NumberPassengers = _numberPassengers;
+        }
     }
 
     public class Motorcycle : Vehicle
     {
         public bool isSidecar { get; }                      //наличие коляски мотоцикла
+
+        public Motorcycle(int _speed, int _probabilityPuncturedWheel, bool _isSidecar) : base(_speed, _probabilityPuncturedWheel)
+        {
+            isSidecar = _isSidecar;
+        }
     }
 }
