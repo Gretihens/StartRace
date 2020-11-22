@@ -25,4 +25,26 @@ namespace StartRace
             InitializeComponent();
         }
     }
+
+    public abstract class Vehicle
+    {
+        public int Speed { get; }                           //скорость метров в секунду
+        public int ProbabilityPuncturedWheel { get; }       //вероятность прокола колеса
+        public bool isPunctured { get; set; }               //факт прокола
+    }
+
+    public class Truck : Vehicle
+    {
+        public int CargoWeight { get; }                     //вес груза
+    }
+
+    public class Car : Vehicle
+    {
+        public int NumberPassengers { get; }                //количество пассажиров
+    }
+
+    public class Motorcycle : Vehicle
+    {
+        public bool isSidecar { get; }                      //наличие коляски мотоцикла
+    }
 }
